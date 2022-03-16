@@ -18,6 +18,7 @@ let to_int = Array.map Variable.to_int
 
 let to_string = string_of_array Variable.to_string
 
+(* Remise à zéro des variables de décision libres *)
 let reset sol =
   Array.iteri (fun i _ ->
     match sol.(i) with

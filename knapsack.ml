@@ -152,13 +152,11 @@ let fayard_heuristic utility weight capacity (sol:Solution.t) =
  * Le but est de prendre des objets dans un sac à dos de manière à maximiser
  * l'utilité du sac tout en respectant la contrainte de la capacité du sac.
  *
- * Si on a plusieurs possibilités de fonctions d'initialisation de lb ajouter
- * un argument optionnel
- *
  * @param utility: Tableau de l'utilité de chaque objet
  * @param weight: Tableau du poids de chaque objet
  * @param capacity: Entier représentant la capacité du sac
- * @return: Liste des indices des objets à prendre dans le sac
+ * @return: Tableau des variables de décision sous forme entière
+ * des objets à prendre dans le sac
  **)
 let solve utility weight capacity : int array =
   (* Vérification des invariants nécessaires au bon déroulement de l'algorithme *)
@@ -186,7 +184,7 @@ let solve utility weight capacity : int array =
     else
       (* Création de 2 nouveaux noeuds par appel récursif *)
       let cont i =
-        (* L'intégrité de sol repose sur l'évaluation paresseuse *)
+        (* L'intégrité de la solution repose sur l'évaluation paresseuse *)
         (reset sol; 
           sol.(i) <- Fixed Q.zero; 
           (fayard_heuristic utility weight capacity sol)
